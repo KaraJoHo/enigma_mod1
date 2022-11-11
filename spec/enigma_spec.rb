@@ -1,4 +1,5 @@
 require 'rspec'
+require 'date'
 require './lib/enigma'
 
 RSpec.describe Enigma do
@@ -51,6 +52,17 @@ RSpec.describe Enigma do
       expected_flattened = [12, 23, 34, 45]
 
       expect(enigma.flatten_key_pairs).to eq(expected_flattened)
+    end
+  end
+
+  describe '#set_date' do
+    it 'sets the date and formats it' do
+      enigma = Enigma.new
+
+      expect(enigma.set_date).to eq(Date.today.strftime("%m%d%y"))
+      enigma.set_date == 111122
+
+      expect(enigma.set_date).to eq("111122")
     end
   end
 end

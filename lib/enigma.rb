@@ -27,6 +27,12 @@ class Enigma
   end
 
   def square_date(date = set_date)
-    square_date = set_date.to_i ** 2
+    squared_date = set_date.to_i ** 2
+  end
+
+  def last_four_date (date = set_date)
+    last_four_digits = []
+    format = square_date.to_s[-4..-1].to_i
+    last_four_digits << format
   end
 end

@@ -78,4 +78,18 @@ RSpec.describe Enigma do
       expect(enigma.square_date).to eq(12348098884)
     end
   end
+
+  describe '#last_four_date' do
+    it 'gets the last 4 digits of the squared date' do
+        enigma = Enigma.new
+
+        expect(enigma.set_date).to eq(Date.today.strftime("%m%d%y"))
+        enigma.set_date == 111122
+
+        expect(enigma.set_date).to eq("111122")
+
+        enigma.square_date
+        expect(enigma.last_four_date).to eq([8884])
+    end
+  end
 end

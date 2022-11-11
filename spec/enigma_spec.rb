@@ -24,4 +24,17 @@ RSpec.describe Enigma do
       expect(enigma.key_generator.length).to eq(5)
     end
   end
+
+  describe '#key_pair_generator' do
+    it 'combines the random number into pairs' do
+      enigma = Enigma.new
+
+      allow(enigma).to receive(:key_generator).and_return([0,1,2,3,4])
+
+      expected_pairs = [[0,1], [1,2], [2,3], [3,4]]
+
+      expect(enigma.key_pair_generator).to eq(expected_pairs)
+
+    end
+  end
 end

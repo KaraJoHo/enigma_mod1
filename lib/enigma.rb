@@ -21,4 +21,8 @@ class Enigma
       key_pair.join.to_i
     end
   end
+
+  def set_date
+    Date.today.strftime("%m%d%y")
+  end
 end

@@ -65,4 +65,17 @@ RSpec.describe Enigma do
       expect(enigma.set_date).to eq("111122")
     end
   end
+
+  describe '#square_date' do
+    it 'squares the date value' do
+      enigma = Enigma.new
+
+      expect(enigma.set_date).to eq(Date.today.strftime("%m%d%y"))
+      enigma.set_date == 111122
+
+      expect(enigma.set_date).to eq("111122")
+
+      expect(enigma.square_date).to eq(12348098884)
+    end
+  end
 end

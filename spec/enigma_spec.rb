@@ -92,4 +92,15 @@ RSpec.describe Enigma do
         expect(enigma.last_four_date).to eq([8884])
     end
   end
+
+  describe '#offset' do
+    it 'sets the final format of the date to the offset' do
+      enigma = Enigma.new
+
+      allow(enigma).to receive(:set_date).and_return("111122")
+      allow(enigma).to receive(:square_date).and_return(12348098884)
+      allow(enigma).to receive(:last_four_date).and_return(8884)
+      expect(enigma.offset).to eq(enigma.last_four_date)
+    end
+  end
 end

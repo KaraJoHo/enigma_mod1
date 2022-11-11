@@ -71,41 +71,41 @@ RSpec.describe Shifter do
   end
 
   describe '#last_four_date' do
-    xit 'gets the last 4 digits of the squared date' do
-        enigma = Enigma.new
+    it 'gets the last 4 digits of the squared date' do
+        shifter = Shifter.new
 
-        expect(enigma.set_date).to eq(Date.today.strftime("%m%d%y"))
-        enigma.set_date == 111122
+        expect(shifter.set_date).to eq(Date.today.strftime("%m%d%y"))
+        shifter.set_date == 111122
 
-        expect(enigma.set_date).to eq("111122")
+        expect(shifter.set_date).to eq("111122")
 
-        enigma.square_date
-        expect(enigma.last_four_date).to eq([8884])
+        shifter.square_date
+        expect(shifter.last_four_date).to eq([8884])
     end
   end
 
   describe '#offset' do
-    xit 'sets the final format of the date to the offset' do
-      enigma = Enigma.new
+    it 'sets the final format of the date to the offset' do
+      shifter = Shifter.new
 
-      allow(enigma).to receive(:set_date).and_return("111122")
-      allow(enigma).to receive(:square_date).and_return(12348098884)
-      allow(enigma).to receive(:last_four_date).and_return(8884)
-      expect(enigma.offset).to eq([8,8,8,4])
+      allow(shifter).to receive(:set_date).and_return("111122")
+      allow(shifter).to receive(:square_date).and_return(12348098884)
+      allow(shifter).to receive(:last_four_date).and_return(8884)
+      expect(shifter.offset).to eq([8,8,8,4])
     end
   end
 
   describe '#shifter_set' do
-    xit 'combines the keys and offset to make final shifter set' do
-      enigma = Enigma.new
+    it 'combines the keys and offset to make final shifter set' do
+      shifter = Shifter.new
 
       expected_flattened = [12, 23, 34, 45]
       expected_offset = [8,8,8,4]
 
-      allow(enigma).to receive(:flatten_key_pairs).and_return(expected_flattened)
-      allow(enigma).to receive(:offset).and_return(expected_flattened)
+      allow(shifter).to receive(:flatten_key_pairs).and_return(expected_flattened)
+      allow(shifter).to receive(:offset).and_return(expected_flattened)
 
-      expect(enigma.shifter_set(expected_flattened, expected_offset)).to eq([20, 31, 42, 49])
+      expect(shifter.shifter_set(expected_flattened, expected_offset)).to eq([20, 31, 42, 49])
     end
   end
 end

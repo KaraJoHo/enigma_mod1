@@ -1,8 +1,8 @@
 class Shifter
 
-  # def key_generator
-  #   (0..9).to_a.sample(5).join('')
-  # end
+  def key_generator
+    (0..9).to_a.sample(5).join('')
+  end
   #
   # def key_pair_generator(key = key_generator)
   #   paired_keys = []

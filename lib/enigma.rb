@@ -25,4 +25,8 @@ class Enigma
   def set_date
     Date.today.strftime("%m%d%y")
   end
+
+  def square_date(date = set_date)
+    square_date = set_date.to_i ** 2
+  end
 end

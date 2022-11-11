@@ -1,3 +1,4 @@
+require 'date'
 class Enigma
 
   def character_set
@@ -30,9 +31,13 @@ class Enigma
     squared_date = set_date.to_i ** 2
   end
 
-  def last_four_date (date = set_date)
+  def last_four_date(date = set_date)
     last_four_digits = []
     format = square_date.to_s[-4..-1].to_i
     last_four_digits << format
+  end
+
+  def offset(date = set_date)
+    last_four_date
   end
 end

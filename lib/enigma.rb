@@ -51,4 +51,5 @@ class Enigma
     end
     final_shifter_set
   end
+  
 end

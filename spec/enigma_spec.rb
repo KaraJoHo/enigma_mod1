@@ -65,4 +65,20 @@ RSpec.describe Enigma do
       expect(enigma.cipher(message, enigma.shifter.shifter_set(expected_flattened, expected_offset))).to eq("keder ohulw")
     end
   end
+
+  describe '#decryptor' do
+    it ' reverses the encrypted message' do
+      enigma = Enigma.new
+      shifter = Shifter.new
+      expected_flattened = [2,27,71,15]
+      expected_offset = [1,0,2,5]
+
+      allow(enigma.shifter).to receive(:offset).and_return([02,27,71,15])
+      allow(enigma.shifter).to receive(:flatten_key_pairs).and_return([01,00,02,05])
+      allow(enigma.shifter).to receive(:shifter_set).and_return([3,27,73,20])
+      message = "keder ohulw"
+
+      expect(enigma.decryptor(message, enigma.shifter.shifter_set(expected_flattened, expected_offset))).to eq("hello world")
+    end
+  end
 end

@@ -25,15 +25,22 @@ RSpec.describe Enigma do
     end
   end
 
-  describe '#encrypt' do
-    it 'has a date from shifter' do
-      enigma = Enigma.new
-      shifter = Shifter.new
+  it 'has a date from shifter' do
+    enigma = Enigma.new
+    shifter = Shifter.new
 
-      allow(enigma.shifter).to receive(:set_date).and_return("111122")
-      expect(enigma.shifter.set_date).to eq("111122")
-    end
+    allow(enigma.shifter).to receive(:set_date).and_return("111122")
+    expect(enigma.shifter.set_date).to eq("111122")
   end
+
+  it 'has offsets from shifter' do
+    enigma = Enigma.new
+    shifter = Shifter.new
+
+    allow(enigma.shifter).to receive(:offset).and_return([8,8,8,4])
+    expect(enigma.shifter.offset).to eq([8,8,8,4])
+  end
+
 
   # describe '#key_generator' do
   #   it ' generates a random set of 5 numbers' do

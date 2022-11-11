@@ -37,4 +37,20 @@ RSpec.describe Enigma do
 
     end
   end
+
+  describe '#flatten_key_pairs' do
+    it 'flattens the key pairs from an array into an array of 4 integers' do
+      enigma = Enigma.new
+
+      allow(enigma).to receive(:key_generator).and_return([0,1,2,3,4])
+
+      expected_pairs = [[0,1], [1,2], [2,3], [3,4]]
+
+      expect(enigma.key_pair_generator).to eq(expected_pairs)
+
+      expected_flattened = [01, 12, 23, 34]
+
+      expect(enigma.flatten_key_pairs).to eq(expected_flattened)
+    end
+  end
 end

@@ -18,55 +18,55 @@ RSpec.describe Shifter do
   end
 
   describe '#key_pair_generator' do
-    xit 'combines the random number into pairs' do
-      enigma = Enigma.new
+    it 'combines the random number into pairs' do
+      shifter = Shifter.new
 
-      allow(enigma).to receive(:key_generator).and_return([0,1,2,3,4])
+      allow(shifter).to receive(:key_generator).and_return([0,1,2,3,4])
 
       expected_pairs = [[0,1], [1,2], [2,3], [3,4]]
 
-      expect(enigma.key_pair_generator).to eq(expected_pairs)
+      expect(shifter.key_pair_generator).to eq(expected_pairs)
 
     end
   end
 
   describe '#flatten_key_pairs' do
-    xit 'flattens the key pairs from an array into an array of 4 integers' do
-      enigma = Enigma.new
+    it 'flattens the key pairs from an array into an array of 4 integers' do
+      shifter = Shifter.new
 
-      allow(enigma).to receive(:key_generator).and_return([1,2,3,4,5])
+      allow(shifter).to receive(:key_generator).and_return([1,2,3,4,5])
 
       expected_pairs = [[1,2], [2,3], [3,4], [4,5]]
 
-      expect(enigma.key_pair_generator).to eq(expected_pairs)
+      expect(shifter.key_pair_generator).to eq(expected_pairs)
 
       expected_flattened = [12, 23, 34, 45]
 
-      expect(enigma.flatten_key_pairs).to eq(expected_flattened)
+      expect(shifter.flatten_key_pairs).to eq(expected_flattened)
     end
   end
 
   describe '#set_date' do
-    xit 'sets the date and formats it' do
-      enigma = Enigma.new
+    it 'sets the date and formats it' do
+      shifter = Shifter.new
 
-      expect(enigma.set_date).to eq(Date.today.strftime("%m%d%y"))
-      enigma.set_date == 111122
+      expect(shifter.set_date).to eq(Date.today.strftime("%m%d%y"))
+      shifter.set_date == 111122
 
-      expect(enigma.set_date).to eq("111122")
+      expect(shifter.set_date).to eq("111122")
     end
   end
 
   describe '#square_date' do
-    xit 'squares the date value' do
-      enigma = Enigma.new
+    it 'squares the date value' do
+      shifter = Shifter.new
 
-      expect(enigma.set_date).to eq(Date.today.strftime("%m%d%y"))
-      enigma.set_date == 111122
+      expect(shifter.set_date).to eq(Date.today.strftime("%m%d%y"))
+      shifter.set_date == 111122
 
-      expect(enigma.set_date).to eq("111122")
+      expect(shifter.set_date).to eq("111122")
 
-      expect(enigma.square_date).to eq(12348098884)
+      expect(shifter.square_date).to eq(12348098884)
     end
   end
 

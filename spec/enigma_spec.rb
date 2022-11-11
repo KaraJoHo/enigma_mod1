@@ -105,7 +105,7 @@ RSpec.describe Enigma do
   end
 
   describe '#shifter_set' do
-    xit 'combines the keys and offset to make final shifter set' do
+    it 'combines the keys and offset to make final shifter set' do
       enigma = Enigma.new
 
       expected_flattened = [12, 23, 34, 45]

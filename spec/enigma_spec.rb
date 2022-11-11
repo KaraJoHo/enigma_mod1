@@ -100,16 +100,16 @@ RSpec.describe Enigma do
       allow(enigma).to receive(:set_date).and_return("111122")
       allow(enigma).to receive(:square_date).and_return(12348098884)
       allow(enigma).to receive(:last_four_date).and_return(8884)
-      expect(enigma.offset).to eq(enigma.last_four_date)
+      expect(enigma.offset).to eq([8,8,8,4])
     end
   end
 
   describe '#shifter_set' do
-    it 'combines the keys and offset to make final shifter set' do
+    xit 'combines the keys and offset to make final shifter set' do
       enigma = Enigma.new
 
       expected_flattened = [12, 23, 34, 45]
-      expected_offset = [8884]
+      expected_offset = [8,8,8,4]
 
       allow(enigma).to receive(:flatten_key_pairs).and_return(expected_flattened)
       allow(enigma).to receive(:offset).and_return(expected_flattened)

@@ -41,6 +41,15 @@ RSpec.describe Enigma do
     expect(enigma.shifter.offset).to eq([8,8,8,4])
   end
 
+  it 'has a shifter set' do
+    enigma = Enigma.new
+    shifter = Shifter.new
+
+    allow(enigma.shifter).to receive(:offset).and_return([8,8,8,4])
+    allow(enigma.shifter).to receive(:flatten_key_pairs).and_return([12, 23, 34, 45])
+    expect(enigma.shifter.shifter_set(enigma.shifter.flatten_key_pairs, enigma.shifter.offset)).to eq([20, 31, 42, 49])
+  end
+
 
   # describe '#key_generator' do
   #   it ' generates a random set of 5 numbers' do

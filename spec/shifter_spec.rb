@@ -50,10 +50,10 @@ RSpec.describe Shifter do
     it 'sets the date and formats it' do
       shifter = Shifter.new
 
-      expect(shifter.set_date).to eq(Date.today.strftime("%m%d%y"))
-      shifter.set_date == 111122
+      allow(shifter.set_date).to receive(:set_date).and_return(Date.today.strftime("%m%d%y"))
+      shifter.set_date == Date.today.strftime("%m%d%y")
 
-      expect(shifter.set_date).to eq("111122")
+      expect(shifter.set_date).to eq(Date.today.strftime("%m%d%y"))
     end
   end
 
@@ -61,10 +61,7 @@ RSpec.describe Shifter do
     it 'squares the date value' do
       shifter = Shifter.new
 
-      expect(shifter.set_date).to eq(Date.today.strftime("%m%d%y"))
-      shifter.set_date == 111122
-
-      expect(shifter.set_date).to eq("111122")
+      allow(shifter).to receive(:set_date).and_return("111122")
 
       expect(shifter.square_date).to eq(12348098884)
     end
@@ -74,12 +71,9 @@ RSpec.describe Shifter do
     it 'gets the last 4 digits of the squared date' do
         shifter = Shifter.new
 
-        expect(shifter.set_date).to eq(Date.today.strftime("%m%d%y"))
-        shifter.set_date == 111122
+        allow(shifter).to receive(:set_date).and_return("111122")
+        allow(shifter).to receive(:square_date).and_return(12348098884)
 
-        expect(shifter.set_date).to eq("111122")
-
-        shifter.square_date
         expect(shifter.last_four_date).to eq([8884])
     end
   end

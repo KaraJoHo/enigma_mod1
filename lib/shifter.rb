@@ -36,7 +36,7 @@ class Shifter
     last_four_date.digits.reverse
   end
 
-  def shifter_set(keys, offsets)
+  def shifter_set(keys = key_generator, offsets = set_date)
     key_nums = keys
     offset_nums = offsets
     final_shifter_set = []

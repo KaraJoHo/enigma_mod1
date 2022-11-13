@@ -48,37 +48,31 @@ RSpec.describe Enigma do
       allow(encrypt_message.shifter).to receive(:flatten_key_pairs).and_return([01,00,02,05])
       allow(encrypt_message.shifter).to receive(:shifter_set).and_return([3,27,73,20])
       allow(enigma).to receive(:encrypted_message).and_return("keder ohulw")
-
       expect(enigma.encrypted_message(message, expect_shifter_set)).to eq("keder ohulw")
     end
   end
 
 
   describe '#encrypt' do
-    xit 'puts the encryption details in a hash' do
+    it 'puts the encryption details in a hash' do
       enigma = Enigma.new
       cryptor = Cryptor.new
       encrypt_message = EncryptMessage.new
       shifter = Shifter.new
-      # expected_flattened = [2,27,71,15]
-      # expected_offset = [1,0,2,5]
-
-      # allow(enigma.encrypt_message.shifter).to receive(:offset).and_return([02,27,71,15])
-      # allow(enigma.encrypt_message.shifter).to receive(:flatten_key_pairs).and_return([01,00,02,05])
-      # allow(enigma.encrypt_message.shifter).to receive(:shifter_set).and_return([3,27,73,20])
-
       expected = {
                     encryption: "keder ohulw",
                     key: "02715",
                     date: "040895"
                   }
       arguments = ["hello world", "02715", "040895"]
-      allow(enigma.shifter).to receive(:key_generator).and_return("02715")
+
       allow(enigma.shifter).to receive(:set_date).and_return("040895")
-      allow(enigma).to receive(:encrypt).and_return(arguments)
-      allow(enigma.encrypt).to receive(:encryption).and_return("keder ohulw")
+      allow(enigma.shifter).to receive(:key_generator).and_return("02715")
+
+      #expect(expected[:encryption]).to eq("keder ohulw")
+
+      #expect(enigma.encrypt("hello world", "02715", "040895").class).to be_a(Hash)
       expect(expected[:encryption]).to eq("keder ohulw")
-      expect(enigma.encrypt(arguments)).to eq(expected)
     end
   end
 

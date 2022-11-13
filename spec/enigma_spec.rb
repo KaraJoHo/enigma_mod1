@@ -82,8 +82,13 @@ RSpec.describe Enigma do
       allow(enigma.shifter).to receive(:flatten_key_pairs).and_return([01,00,02,05])
       allow(enigma.shifter).to receive(:shifter_set).and_return([3,27,73,20])
       message = "keder ohulw"
+      message2 = "keder ohulw!"
+      message3 = "KeDEr OHulW!?"
 
       expect(enigma.decryptor(message, enigma.shifter.shifter_set(expected_flattened, expected_offset))).to eq("hello world")
+      expect(enigma.decryptor(message2, enigma.shifter.shifter_set(expected_flattened, expected_offset))).to eq("hello world!")
+      expect(enigma.decryptor(message3, enigma.shifter.shifter_set(expected_flattened, expected_offset))).to eq("hello world!?")
+
     end
   end
 end

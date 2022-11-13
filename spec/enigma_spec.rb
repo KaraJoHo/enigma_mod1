@@ -39,16 +39,21 @@ RSpec.describe Enigma do
       cryptor = Cryptor.new
       encrypt_message = EncryptMessage.new
       shifter = Shifter.new
+      the_date = "040895"
+      the_key = "02715"
       expected_flattened = [2,27,71,15]
       expected_offset = [1,0,2,5]
       expect_shifter_set = [3,27,73,20]
       message = "hello world"
 
-      allow(encrypt_message.shifter).to receive(:offset).and_return([02,27,71,15])
-      allow(encrypt_message.shifter).to receive(:flatten_key_pairs).and_return([01,00,02,05])
+      # allow(encrypt_message.shifter).to receive(:offset).and_return([02,27,71,15])
+      # allow(encrypt_message.shifter).to receive(:flatten_key_pairs).and_return([01,00,02,05])
+      allow(encrypt_message.shifter).to receive(:set_date).and_return("040895")
+      allow(encrypt_message.shifter).to receive(:key_generator).and_return("02715")
       allow(encrypt_message.shifter).to receive(:shifter_set).and_return([3,27,73,20])
-      allow(enigma).to receive(:encrypted_message).and_return("keder ohulw")
+      #allow(enigma).to receive(:encrypted_message).and_return("keder ohulw")
       expect(enigma.encrypted_message(message, expect_shifter_set)).to eq("keder ohulw")
+      #expect(enigma.encrypted_message(message, the_key, the_date)).to eq("keder ohulw")
     end
   end
 

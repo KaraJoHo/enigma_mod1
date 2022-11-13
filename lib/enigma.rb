@@ -17,8 +17,16 @@ class Enigma
   end
 
   def encrypted_message(message, shifter)
-    @translated << @encrypt_message.cipher(message, @shifter.shifter_set(@shifter.flatten_key_pairs, @shifter.offset))
+    #require 'pry' ;binding.pry
+    @translated << @encrypt_message.cipher(message, shifter) #@shifter.shifter_set(@shifter.flatten_key_pairs, @shifter.set_date))
+    @translated.pop
   end
+
+  # def encrypted_message(message, key, date)
+  #   require 'pry' ;binding.pry
+  #   @translated << @encrypt_message.cipher(message, shifter.shifter_set(key, date)) #@shifter.shifter_set(@shifter.flatten_key_pairs, @shifter.set_date))
+  #   @translated.pop
+  # end
 
   def encrypt(message, key = @shifter.key_generator, date = @shifter.set_date)
 

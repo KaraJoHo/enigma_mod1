@@ -4,9 +4,17 @@ class Shifter
     key_gen = (0..9).to_a.sample(5).join('')
   end
 
+  def prep_key(key = key_generator)
+    prep_key = key.split('')
+    prepare_key = prep_key.map {|key_elem| key_elem.to_i}
+  end
+
   def key_pair_generator(key = key_generator)
     paired_keys = []
-    key_generator.each_cons(2) do |key|
+    #prep_key = key_generator.split('')
+    #prepare_to_pair = prep_key.map {|key_elem| key_elem.to_i}
+    #prepare_to_pair.each_cons(2) do |key|
+    prep_key.each_cons(2) do |key|
       paired_keys << key
     end
     paired_keys
@@ -27,23 +35,27 @@ class Shifter
   end
 
   def last_four_date(date = set_date)
-    last_four_digits = []
+    #last_four_digits = []
     format = square_date.to_s[-4..-1].to_i
-    last_four_digits << format
+    format
+    #require 'pry' ;binding.pry
+    #last_four_digits << format
+    #last_four_digits
   end
 
   def offset(date = set_date)
-    last_four_date.digits.reverse
+    offset_num = last_four_date.digits.reverse
   end
 
-  def shifter_set(keys = key_generator, offsets = set_date)
-    key_nums = keys
-    offset_nums = offsets
-    final_shifter_set = []
+  def shifter_set (keys = key_generator, date = set_date)
+    key_nums = flatten_key_pairs(keys)
 
-    keys.each_with_index do |key, index|
-      final_shifter_set << key_nums[index] + offset_nums[index].to_i
-    end
-    final_shifter_set
+     final_shifter_set = []
+
+     key_nums.each_with_index do |key, idx|
+       #require 'pry' ;binding.pry
+      final_shifter_set << key_nums[idx] + offset[idx]
+     end
+     final_shifter_set
   end
 end

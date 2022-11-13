@@ -21,7 +21,7 @@ RSpec.describe Shifter do
     it 'combines the random number into pairs' do
       shifter = Shifter.new
 
-      allow(shifter).to receive(:key_generator).and_return([0,1,2,3,4])
+      allow(shifter).to receive(:key_generator).and_return("01234")
 
       expected_pairs = [[0,1], [1,2], [2,3], [3,4]]
 
@@ -34,7 +34,7 @@ RSpec.describe Shifter do
     it 'flattens the key pairs from an array into an array of 4 integers' do
       shifter = Shifter.new
 
-      allow(shifter).to receive(:key_generator).and_return([1,2,3,4,5])
+      allow(shifter).to receive(:key_generator).and_return("12345")
 
       expected_pairs = [[1,2], [2,3], [3,4], [4,5]]
 
@@ -72,9 +72,11 @@ RSpec.describe Shifter do
         shifter = Shifter.new
 
         allow(shifter).to receive(:set_date).and_return("111122")
-        allow(shifter).to receive(:square_date).and_return(12348098884)
+        #allow(shifter).to receive(:square_date).and_return(12348098884)
+        squared_date = 12348098884
+        date = "111122"
 
-        expect(shifter.last_four_date).to eq([8884])
+        expect(shifter.last_four_date).to eq(8884)
     end
   end
 
@@ -90,16 +92,30 @@ RSpec.describe Shifter do
   end
 
   describe '#shifter_set' do
-    it 'combines the keys and offset to make final shifter set' do
+    xit 'combines the keys and offset to make final shifter set' do
       shifter = Shifter.new
 
       expected_flattened = [12, 23, 34, 45]
       expected_offset = [8,8,8,4]
-
+      #
       allow(shifter).to receive(:flatten_key_pairs).and_return(expected_flattened)
       allow(shifter).to receive(:offset).and_return(expected_flattened)
+      key = "12345"
+      date = "111122"
+      #
+      shifter.offset(date)
+      offset = [8,8,8,4]
+      expect(shifter.shifter_set(key, date)).to eq([20, 31, 42, 49])
 
       expect(shifter.shifter_set(expected_flattened, expected_offset)).to eq([20, 31, 42, 49])
+    end
+  end
+
+  describe '#prep_key' do
+    it 'splits the key to be used as an integer' do
+      shifter = Shifter.new
+      key = "12345"
+      expect(shifter.prep_key(key)).to eq([1,2,3,4,5])
     end
   end
 end

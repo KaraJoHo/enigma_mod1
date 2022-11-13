@@ -3,7 +3,7 @@ require './lib/cryptor'
 require './lib/encrypt_message'
 
 RSpec.describe EncryptMessage do
-  it 'exists and is a child of cryptor' do
+  xit 'exists and is a child of cryptor' do
     encrypt_message = EncryptMessage.new
 
     expect(encrypt_message).to be_a(EncryptMessage)
@@ -11,7 +11,7 @@ RSpec.describe EncryptMessage do
   end
 
   describe '#cipher' do
-    it ' take a message and iterates over the character_set to return encrypted string' do
+  xit ' take a message and iterates over the character_set to return encrypted string' do
       cryptor = Cryptor.new
       encrypt_message = EncryptMessage.new
       shifter = Shifter.new
@@ -29,6 +29,62 @@ RSpec.describe EncryptMessage do
       expect(encrypt_message.cipher(message, encrypt_message.shifter.shifter_set(expected_flattened, expected_offset))).to eq("keder ohulw")
       expect(encrypt_message.cipher(message2, encrypt_message.shifter.shifter_set(expected_flattened, expected_offset))).to eq("keder ohulw!")
       expect(encrypt_message.cipher(message3, encrypt_message.shifter.shifter_set(expected_flattened, expected_offset))).to eq("keder ohulw!!")
+    end
+  end
+
+  it 'exists with attributes' do
+    cryptor = Cryptor.new
+    shifter = Shifter.new
+    message = "hello world"
+    encrypt_message = EncryptMessage.new(message)
+  end
+
+  describe '#cipher_message' do
+    it 'can cipher a message' do
+      cryptor = Cryptor.new
+      shifter = Shifter.new
+      expected_flattened = [2,27,71,15]
+      expected_offset = [1,0,2,5]
+
+      # key = "02715"
+      # date = "040895"
+      message = "hello world"
+      encrypt_message = EncryptMessage.new(message)
+      allow(encrypt_message.shifter).to receive(:key_generator).and_return("02715")
+      allow(encrypt_message.shifter).to receive(:set_date).and_return("040895")
+      allow(encrypt_message).to receive(:message).and_return("hello world")
+
+
+
+      # message3 = "HeLlO wOrlD!!"
+      expect(encrypt_message.cipher_message).to eq("keder ohulw")
+
+      message2 = "hello World!"
+      encrypt_message = EncryptMessage.new(message2)
+      allow(encrypt_message.shifter).to receive(:key_generator).and_return("02715")
+      allow(encrypt_message.shifter).to receive(:set_date).and_return("040895")
+
+      allow(encrypt_message).to receive(:message).and_return("hello World!")
+      expect(encrypt_message.cipher_message).to eq("keder ohulw!")
+
+
+    end
+  end
+
+  describe '#encryption_result_set' do
+    it 'returns a hash of information used to encrypt message' do
+      cryptor = Cryptor.new
+      shifter = Shifter.new
+      message = "hello world"
+      encrypt_message = EncryptMessage.new(message, "02715", "040895")
+
+      allow(encrypt_message.shifter).to receive(:key_generator).and_return("02715")
+      allow(encrypt_message.shifter).to receive(:set_date).and_return("040895")
+      allow(encrypt_message).to receive(:message).and_return("hello world")
+
+      expected = {:encryption => "keder ohulw", :key => "02715", :date => "040895"}
+      #allow(encrypt_message).to receive(:encryption_result_set).and_return(expected)
+      expect(encrypt_message.encryption_result_set).to eq(expected)
     end
   end
 end

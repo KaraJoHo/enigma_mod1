@@ -3,41 +3,41 @@ require './lib/shifter'
 require './lib/encrypt_message'
 require './lib/cryptor'
 class Enigma
-  attr_reader :shifter
+  attr_reader :cryptor, :shifter
 
   def initialize
     @cryptor = Cryptor.new
-    @encrypt_message = EncryptMessage.new
     @shifter = Shifter.new
-    @translated = []
   end
 
   def character_set
     ("a".."z").to_a << " "
   end
 
-  def encrypted_message(message, shifter)
+  def encrypt(message, key = nil, date = nil)
     #require 'pry' ;binding.pry
-    @translated << @encrypt_message.cipher(message, shifter) #@shifter.shifter_set(@shifter.flatten_key_pairs, @shifter.set_date))
-    @translated.pop
+    @encrypt_message = EncryptMessage.new(message, key, date)
+    @encrypt_message.encryption_result_set
   end
 
-  # def encrypted_message(message, key, date)
-  #   require 'pry' ;binding.pry
-  #   @translated << @encrypt_message.cipher(message, shifter.shifter_set(key, date)) #@shifter.shifter_set(@shifter.flatten_key_pairs, @shifter.set_date))
+
+  # def encrypted_message(message, shifter)
+  #   #require 'pry' ;binding.pry
+  #   @translated << @encrypt_message.cipher(message, shifter) #@shifter.shifter_set(@shifter.flatten_key_pairs, @shifter.set_date))
   #   @translated.pop
   # end
 
-  def encrypt(message, key = @shifter.key_generator, date = @shifter.set_date)
 
-    {
+  # def encrypt(message, key = @shifter.key_generator, date = @shifter.set_date)
+  #
+  #   {
+  #
+  #     :encryption => @translated,
+  #     :key => key,
+  #     :date => date
+  #   }
 
-      :encryption => @translated,
-      :key => key,
-      :date => date
-    }
-
-  end
+  # end
 
   # def cipher(message, shifter)
   #   translated_message = ''

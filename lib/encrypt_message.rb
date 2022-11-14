@@ -4,13 +4,12 @@ require 'date'
 class EncryptMessage < Cryptor
   attr_reader :key, :date, :message, :shifter, :character_set
 
-  def initialize(message, key = nil, date = nil)
+  def initialize(message, key = Shifter.new.key_generator, date = Shifter.new.set_date)
     @shifter = Shifter.new
     @message = message
-    @generate_key = @shifter.key_generator
-    @key = (@generate_key if key == nil) || key
-    #require 'pry' ;binding.pry
-    @date = (@shifter.set_date if date == nil) || date
+    #@generate_key = @shifter.key_generator
+    @key = key
+    @date = date
     @character_set = ("a".."z").to_a << " "
   end
 
@@ -25,6 +24,7 @@ class EncryptMessage < Cryptor
 
   def cipher_message
     cipher(@message, @shifter.shifter_set(@key, @date))
+   #require 'pry' ;binding.pry
   end
 
 end

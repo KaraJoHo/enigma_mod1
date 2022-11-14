@@ -3,6 +3,7 @@ require './lib/shifter'
 require './lib/encrypt_message'
 require './lib/decrypt_message'
 require './lib/cryptor'
+
 class Enigma
   attr_reader :cryptor, :shifter
 

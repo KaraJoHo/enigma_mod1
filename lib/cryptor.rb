@@ -1,5 +1,6 @@
 require './lib/shifter'
-class Cryptor
+
+class Cryptor < Shifter
   attr_reader :shifter, :character_set
   def initialize
     @shifter = Shifter.new

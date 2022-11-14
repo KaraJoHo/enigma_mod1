@@ -24,7 +24,6 @@ RSpec.describe Shifter do
       expected_pairs = [[0,1], [1,2], [2,3], [3,4]]
 
       expect(shifter.key_pair_generator("01234")).to eq(expected_pairs)
-
     end
   end
 
@@ -46,7 +45,6 @@ RSpec.describe Shifter do
     it 'sets the date and formats it' do
       shifter = Shifter.new
 
-      allow(shifter.set_date).to receive(:set_date).and_return(Date.today.strftime("%m%d%y"))
       shifter.set_date == Date.today.strftime("%m%d%y")
 
       expect(shifter.set_date).to eq(Date.today.strftime("%m%d%y"))

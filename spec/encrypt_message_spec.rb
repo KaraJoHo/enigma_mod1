@@ -28,13 +28,6 @@ RSpec.describe EncryptMessage do
     end
   end
 
-  it 'exists with attributes' do
-    cryptor = Cryptor.new
-    shifter = Shifter.new
-    message = "hello world"
-    encrypt_message = EncryptMessage.new(message)
-  end
-
   describe '#cipher_message' do
     it 'can cipher a message' do
       cryptor = Cryptor.new

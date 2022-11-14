@@ -19,20 +19,13 @@ RSpec.describe DecryptMessage do
   end
 
   describe '#cipher' do
-  it ' take a message and iterates over the character_set to return encrypted string' do
+  it ' takes a message and iterates over the character_set to return encrypted string' do
       cryptor = Cryptor.new
       message = "keder ohulw"
       decrypt_message = DecryptMessage.new(message)
       shifter = Shifter.new
       expect(decrypt_message.cipher(message, shifter.shifter_set("02715", "040895"))).to eq("hello world")
     end
-  end
-
-  it 'exists with attributes' do
-    cryptor = Cryptor.new
-    shifter = Shifter.new
-    message = "keder ohulw"
-    decrypt_message = DecryptMessage.new(message)
   end
 
   describe '#cipher_message' do

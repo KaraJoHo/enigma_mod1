@@ -24,7 +24,6 @@ RSpec.describe Shifter do
       expected_pairs = [[0,1], [1,2], [2,3], [3,4]]
 
       expect(shifter.key_pair_generator("01234")).to eq(expected_pairs)
-
     end
   end
 

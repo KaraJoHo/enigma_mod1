@@ -43,31 +43,17 @@ RSpec.describe EncryptMessage do
     it 'can cipher a message' do
       cryptor = Cryptor.new
       shifter = Shifter.new
-      expected_flattened = [2,27,71,15]
-      expected_offset = [1,0,2,5]
 
-      # key = "02715"
-      # date = "040895"
       message = "hello world"
-      encrypt_message = EncryptMessage.new(message)
-      allow(encrypt_message.shifter).to receive(:key_generator).and_return("02715")
-      allow(encrypt_message.shifter).to receive(:set_date).and_return("040895")
-      allow(encrypt_message).to receive(:message).and_return("hello world")
-
-
+      encrypt_message = EncryptMessage.new(message, "02715", "040895")
 
       # message3 = "HeLlO wOrlD!!"
       expect(encrypt_message.cipher_message).to eq("keder ohulw")
 
       message2 = "hello World!"
-      encrypt_message = EncryptMessage.new(message2)
-      allow(encrypt_message.shifter).to receive(:key_generator).and_return("02715")
-      allow(encrypt_message.shifter).to receive(:set_date).and_return("040895")
+      encrypt_message = EncryptMessage.new(message2, "02715", "040895")
 
-      allow(encrypt_message).to receive(:message).and_return("hello World!")
       expect(encrypt_message.cipher_message).to eq("keder ohulw!")
-
-
     end
   end
 
@@ -77,13 +63,8 @@ RSpec.describe EncryptMessage do
       shifter = Shifter.new
       message = "hello world"
       encrypt_message = EncryptMessage.new(message, "02715", "040895")
-
-      allow(encrypt_message.shifter).to receive(:key_generator).and_return("02715")
-      allow(encrypt_message.shifter).to receive(:set_date).and_return("040895")
-      allow(encrypt_message).to receive(:message).and_return("hello world")
-
       expected = {:encryption => "keder ohulw", :key => "02715", :date => "040895"}
-      #allow(encrypt_message).to receive(:encryption_result_set).and_return(expected)
+
       expect(encrypt_message.encryption_result_set).to eq(expected)
     end
   end

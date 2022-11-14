@@ -31,7 +31,6 @@ RSpec.describe Enigma do
       key = "02715"
       date = "040895"
       encrypt_message = EncryptMessage.new(message, key, date)
-      #require 'pry' ;binding.pry
 
       expected = {:encryption => "keder ohulw", :key => "02715", :date => "040895"}
 
@@ -40,23 +39,18 @@ RSpec.describe Enigma do
     end
   end
 
-  describe '#decryptor' do
-    xit ' reverses the encrypted message' do
+  describe '#decrypt' do
+    it 'puts the encryption details in a hash' do
       enigma = Enigma.new
-      shifter = Shifter.new
-      expected_flattened = [2,27,71,15]
-      expected_offset = [1,0,2,5]
-
-      allow(enigma.shifter).to receive(:offset).and_return([02,27,71,15])
-      allow(enigma.shifter).to receive(:flatten_key_pairs).and_return([01,00,02,05])
-      allow(enigma.shifter).to receive(:shifter_set).and_return([3,27,73,20])
+      cryptor = Cryptor.new
       message = "keder ohulw"
-      message2 = "keder ohulw!"
-      message3 = "KeDEr OHulW!?"
+      key = "02715"
+      date = "040895"
+      encrypt_message = EncryptMessage.new(message, key, date)
 
-      expect(enigma.decryptor(message, enigma.shifter.shifter_set(expected_flattened, expected_offset))).to eq("hello world")
-      expect(enigma.decryptor(message2, enigma.shifter.shifter_set(expected_flattened, expected_offset))).to eq("hello world!")
-      expect(enigma.decryptor(message3, enigma.shifter.shifter_set(expected_flattened, expected_offset))).to eq("hello world!?")
+      expected = {:decryption => "hello world", :key => "02715", :date => "040895"}
+
+      expect(enigma.decrypt("keder ohulw", "02715", "040895")).to eq(expected)
 
     end
   end

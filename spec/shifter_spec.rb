@@ -46,7 +46,6 @@ RSpec.describe Shifter do
     it 'sets the date and formats it' do
       shifter = Shifter.new
 
-      allow(shifter.set_date).to receive(:set_date).and_return(Date.today.strftime("%m%d%y"))
       shifter.set_date == Date.today.strftime("%m%d%y")
 
       expect(shifter.set_date).to eq(Date.today.strftime("%m%d%y"))

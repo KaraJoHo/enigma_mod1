@@ -94,7 +94,7 @@ RSpec.describe Enigma do
       key = "02715"
       date = "040895"
       encrypt_message = EncryptMessage.new(message, key, date)
-      require 'pry' ;binding.pry
+      #require 'pry' ;binding.pry
 
       # allow(enigma.encrypt(message)).to receive(:message).and_return("hello world")
       # allow(enigma.encrypt(key)).to receive(:key).and_return("02715")

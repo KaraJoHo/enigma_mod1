@@ -32,12 +32,8 @@ class Shifter
   end
 
   def last_four_date(date)
-    #last_four_digits = []
     format = square_date(date).to_s[-4..-1].to_i
     format
-    #require 'pry' ;binding.pry
-    #last_four_digits << format
-    #last_four_digits
   end
 
   def offset(date)
@@ -47,14 +43,11 @@ class Shifter
   def shifter_set (keys = key_generator, date = set_date)
     key_nums = flatten_key_pairs(keys)
     the_date = offset(date)
-    #require 'pry' ;binding.pry
-     final_shifter_set = []
+    final_shifter_set = []
 
      key_nums.each_with_index do |key, idx|
-
       final_shifter_set << (key_nums[idx] + the_date[idx])
      end
      final_shifter_set
-
   end
 end

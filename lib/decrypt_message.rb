@@ -1,6 +1,7 @@
 require './lib/shifter'
 require './lib/cryptor'
 require 'date'
+
 class DecryptMessage < Cryptor
   attr_reader :key, :date, :message, :shifter, :character_set
 

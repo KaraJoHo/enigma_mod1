@@ -14,13 +14,9 @@ class Cryptor
       if @character_set.include?(character)
         char_idx = @character_set.index(character)
         shift = shifter[i % shifter.length]
-        new_index = (char_idx + shift) % @character_set.length
+        new_index = (char_idx + shift) % 27
 
-        if new_index < @character_set.length
-          translated_message << @character_set[new_index]
-        else
-          translated_message << @character_set[(new_index) % @character_set.length]
-        end
+        translated_message << @character_set[new_index]
       else
         translated_message << character
       end

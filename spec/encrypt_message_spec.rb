@@ -11,6 +11,13 @@ RSpec.describe EncryptMessage do
     expect(EncryptMessage < Cryptor).to eq(true)
   end
 
+  it 'has attributes' do
+    message = "hello world"
+    encrypt_message = EncryptMessage.new(message)
+
+    expect(encrypt_message.message).to eq("hello world")
+  end
+
   describe '#cipher' do
   it ' take a message and iterates over the character_set to return encrypted string' do
       cryptor = Cryptor.new

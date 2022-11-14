@@ -1,7 +1,7 @@
 require './lib/shifter'
 require './lib/cryptor'
 require 'date'
-class EncryptMessage < Cryptor
+class DecryptMessage < Cryptor
   attr_reader :key, :date, :message, :shifter, :character_set
 
   def initialize(message, key = Shifter.new.key_generator, date = Shifter.new.set_date)
@@ -9,12 +9,12 @@ class EncryptMessage < Cryptor
     @message = message
     @key = key
     @date = date
-    @character_set = ("a".."z").to_a << " "
+    @character_set = (("a".."z").to_a << " ").reverse
   end
 
-  def encryption_result_set
+  def decryption_result_set
     final_set = {}
-    final_set[:encryption] = cipher_message
+    final_set[:decryption] = cipher_message
     final_set[:key] = @key
     final_set[:date] = @date
     final_set
